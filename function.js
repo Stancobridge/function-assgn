@@ -1,105 +1,72 @@
-// WRITE A SIMPLE PROGRAM 
-// THE OUTPUT SHOULD LOOK LIKE THIS
+// Corrections
+/**
+ * 
+ * Since you are creating an obj that each of it's property will hold an array of members in organization 
+ * and each item in this array  is the details of the member in the organization
+ * this means that u don't need to hard code it inside your code, this array must only be filled during the time 
+ * you are using this program not the time u are writing it, so the above members shouldn't be there
+ * 
+ * Again, since you are going to be updating this object from the time u are using it, this means that u have to create a method or function to 
+ * be updating this obj, (I will choose to use function because the object is a global object and it is not bounded to any class or another object,
+ * hence it can be updated from anywhere)
+ */
 
-// ====================
-/* STUDENT INFORMATION 
-   ====================
+//  Our Global Object
+let members = {};
 
-   NAME: JOHN IFEMEZUO ANAYO
-   REG.NO: FPOCSNB17027
-   LEVEL:ND1 REGULAR II */
+/**
+ * The object above holds all our member, now we need to update it
+ * Here is the function to add members to it
+ *  */ 
 
-// THE INFORMATION YOU INPUT CARRIES ARRAYS OF NAME.
+ function addMember(id, memberDetailsArray) {
+     /**
+      * In this function we have @param(id and memberDetailsArray) as our parameter
+      * This is because we are going to be updating object, and each property in the object will hold an array
+      * 
+      * this id must be unique to each member, we would have generated a unique id randomly while adding to the object
+      * but because we need to identify this members by ourself, we need to make sure that we know each user's id, incase we need 
+      * get the details of any user we can just call the id on the object and it will return the desired user's details
+      * 
+      * secondly we have memberDetailsArray, this is nothing but the array that contains the user details 
+      */
 
-var CreatDetails;
-var arrayOfStudent;
-var displaydetail;
 
-var spacers = {
-    newline : function () {
-         return "\n";
-    },
+      /**
+       * now we need to check if id and memberDetailsArray is entered before updating, this is to make sure of accuracy
+       * of our object, and make sure our function is efficient. Now remember that by default any variable that u created without
+       * value has the value of undefined and undefined is falsy so if nothing is entered in both of them it will be false,
+       * so we are going to use the power of this falsy and truthy behaviour of javascript
+       */
 
-    border : function () {
-        var simbol;
-        simbol = "====================="
-        return simbol;
-    },
-    
+       if(id && memberDetailsArray) {
+        /**
+         * We are now sure that id and memberDetailsArray is filled, now we need to make sure that memberDetailsArray is 
+         * an array and id is a string
+         *  */
+        
+         if(typeof id == "string" && memberDetailsArray.constructor.toString().indexOf('Array') > -1) {
+            //  I used memberDetailsArray.constuctor.toString().indexOf('Array') to check if memberDetailsArray is array instead of
+            // typeof memberDetailsArray, because typeof any array will return object instead of array, the method I used is out of this context 
+            // but you can study it
+            
+            // Now we update the member
+            members[id] = memberDetailsArray
+            
+         } else {
+            //  Always tell ur user his fault
+             console.log("id must be a string and memberDetailsArray")
+         }
+       } else {
+          //  Always tell ur user his fault
+          console.log("id and memberDetailsArray must be filled")
+           
+       }
+ }
+
+//  Now let's create another function that will help us get any user that we want
+function getUser(id){
+    return members[id]
 }
 
-var newline = spacers.newline();
-var border  = spacers.border();
-
-var label = function (hold) {
-    hold = border + newline;
-    hold += "Registerd Information" + newline;
-    hold += border;
-    return hold
-}
-
-CreatDetails = function (name,reg,level,program) {
-    this.name =  name;
-    this.reg  =  reg;
-    this.level = level;
-    this.program = program;
-
-    this.showdetails = function () {
-        var register;
-        register = "Name    : " + this.name + newline;
-        register += "Reg.No  : " + this.reg + newline;
-        register += "Level   : " + this.level + newline;
-        register += "Program : " + this.program ;
-        return register
-    }
-}
-
-
-arrayOfStudent = {
-    nd1 : [
-        {
-            name : "victor Tochukwu",
-            "Reg.No" : "FPOCSNB17027",
-            level : "Nd2",
-            program: "regular 1"
-        },
-        {
-            name : "Sam Chimaoge",
-            "Reg.No" : "FPOCSNB17030",
-            level : "Nd2",
-            program: "regular 2"
-        },
-        {
-            name : "Onyebuchi Mmeso",
-            "Reg.No" : "FPOCSNB17001",
-            level : "Nd2",
-            program: "regular 1"
-        },
-        {
-            name : "Stanley Tochukwu",
-            "Reg.No" : "FPOCSNB17027",
-            level : "Hnd3",
-            program: "On IT right know."
-        },
-        {
-            name : "Godwin Idontknowhisothername",
-            "Reg.No" : "FPOCSNB17000",
-            level : "Hnd4",
-            program: "On IT right know."
-        },
-    ]
-}
-
-console.log(label())
-detailfunc = new CreatDetails(arrayOfStudent.nd1[0].name,arrayOfStudent.nd1[0]["Reg.No"],arrayOfStudent.nd1[0].level,arrayOfStudent.nd1[0].program);
-console.log(detailfunc.showdetails())
-
-console.log(border);
-detailfunc = new CreatDetails(arrayOfStudent.nd1[3].name,arrayOfStudent.nd1[3]["Reg.No"],arrayOfStudent.nd1[3].level,arrayOfStudent.nd1[3].program);
-console.log(detailfunc.showdetails())
-
-console.log(border);
-detailfunc = new CreatDetails(arrayOfStudent.nd1[4].name,arrayOfStudent.nd1[4]["Reg.No"],arrayOfStudent.nd1[4].level,arrayOfStudent.nd1[4].program);
-console.log(detailfunc.showdetails())
-
-
+// DONE
